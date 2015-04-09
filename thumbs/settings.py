@@ -51,14 +51,15 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-FILE_PATH = os.path.dirname(os.path.abspath(__file__))
-MEDIA_ROOT = os.path.normpath(os.path.join(FILE_PATH, 'media'))
+FILE_PATH = os.path.dirname(os.path.dirname(__file__))
+MEDIA_ROOT = os.path.join(FILE_PATH, 'media')
+print MEDIA_ROOT
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 
-MEDIA_URL = '/galeria/'
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
