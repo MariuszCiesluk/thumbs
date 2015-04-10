@@ -12,7 +12,6 @@ def index(request):
 
 def thumbnail(request, size):
     files = os.listdir(settings.MEDIA_ROOT)
-    print files
     if len(files) < 1 or ('cache' in files and len(files) == 1):
         raise Http404("brak zdjec w folderze")
     picture = random.choice(files)
