@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.conf import settings
 from sorl.thumbnail import get_thumbnail
@@ -13,14 +12,15 @@ def index(request):
 
 def thumbnail(request, size):
     files = os.listdir(settings.MEDIA_ROOT)
-    if len(files) < 1:
-        return Http404("brak zdjec w folderze")
+    print files
+    if len(files) < 1 or ('cache' in files and len(files) == 1):
+        raise Http404("brak zdjec w folderze")
     picture = random.choice(files)
     im = get_thumbnail(picture, size, crop='center', quality=99)
     try:
         readed_image = im.read()
     except IOError:
-        return Http404("blad dostepu do pliku")
+        raise Http404("blad dostepu do pliku")
     except Exception:
-        return Http404("nieokreslony blad")
+        raise Http404("nieokreslony blad")
     return HttpResponse(readed_image, content_type="image/jpeg")
