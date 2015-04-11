@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.conf import settings
 from sorl.thumbnail import get_thumbnail
 import os
+import re
 import random
 
 
@@ -9,9 +10,20 @@ import random
 def index(request):
     return HttpResponse("index")
 
+def check_size(size):
+    """
+    check is parameter 'size' has:
+    * two digit values
+    * 'x' beetween them
+    """
+    values = size.split('x')
+    if len(values) < 2:
+        raise Http404("brak dwoch wymiarow obrazka")
+    digits = re.compile('\d')
 
 def thumbnail(request, size):
     files = os.listdir(settings.MEDIA_ROOT)
+    check_size(size)
     if len(files) < 1 or ('cache' in files and len(files) == 1):
         raise Http404("brak zdjec w folderze")
     picture = random.choice(files)
