@@ -4,7 +4,7 @@ random thumbs using sorl-thumbnail
 Key Features:
 
 * generating thumbs by sorl-thumbnails
-* django mem/db/storage cache (which be better?)
-* prepared function and class based view
+* django memcache (which be better?)
+* prepared function view
 * simple tests
-* deploy file (fabric maybe?)
+* deploy file for virtualenv, test and runserver - fabric
